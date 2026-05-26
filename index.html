@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+
+  <title>Self Recovery System｜自我恢复系统</title>
+
+  <link rel="stylesheet" href="./css/variables.css" />
+  <link rel="stylesheet" href="./css/base.css" />
+  <link rel="stylesheet" href="./css/components.css" />
+  <link rel="stylesheet" href="./css/mobile.css" />
+</head>
+
+<body>
+  <div class="app" id="app">
+
+    <!-- 顶部栏 -->
+    <header class="app-header">
+      <h1 class="app-title">自我恢复系统</h1>
+      <p class="app-subtitle en" id="appSubtitle">TODAY BOARD</p>
+    </header>
+
+    <!-- 主体内容 -->
+    <main class="main">
+
+      <!-- 今日页 -->
+      <section class="page page-active" id="page-today" data-page="today">
+        <section class="status-box">
+          <p class="status-line">
+            第 <span class="num" id="todayWeekNumber">1</span> 周 ·
+            <span id="todayWeekday">周一</span>
+          </p>
+          <p class="status-line">
+            今日类型：<span id="todayType">普通推进日</span>
+          </p>
+          <p class="status-line">
+            今日策略：<span id="todayStrategy">完成必做，再看可选</span>
+          </p>
+        </section>
+
+        <section class="notice-box">
+          <p>今天不需要解决整个人生，只需要完成今天这一小块。</p>
+        </section>
+
+        <section class="panel">
+          <div class="panel-title">今日必做</div>
+          <div class="panel-body" id="todayMustList">
+            <!-- JS 渲染今日必做任务 -->
+          </div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-title">今日可选</div>
+          <div class="panel-body" id="todayOptionalList">
+            <!-- JS 渲染今日可选任务 -->
+          </div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-title">连击挑战</div>
+          <div class="panel-body" id="todayRoutineList">
+            <!-- JS 渲染今日连击简表 -->
+          </div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-title">今日一句话</div>
+          <div class="panel-body">
+            <textarea
+              id="dailyNoteInput"
+              class="short-textarea"
+              placeholder="今天先写一句……"
+            ></textarea>
+            <div class="button-row">
+              <button class="flat-button primary" id="saveDailyNoteBtn">保存下来</button>
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <!-- 本周页 -->
+      <section class="page" id="page-weekly" data-page="weekly">
+        <section class="panel">
+          <div class="panel-title">本周概览</div>
+          <div class="panel-body">
+            <p class="weekly-title" id="weeklyTitle">示例周计划：恢复秩序与小步推进</p>
+            <p>主题：<span id="weeklyTheme">最低完成线优先</span></p>
+            <p>压力等级：<span class="en" id="weeklyPressure">MID</span></p>
+            <p>
+              <span class="date" id="weeklyStartDate">01/01</span>
+              -
+              <span class="date" id="weeklyEndDate">01/07</span>
+            </p>
+          </div>
+        </section>
+
+        <section class="notice-box">
+          <p>把这一周先放到纸面上，混乱就会少一点。</p>
+        </section>
+
+        <section class="panel">
+          <div class="panel-title">原始计划大纲</div>
+          <div class="panel-body">
+            <button class="flat-button" id="toggleWeeklyOutlineBtn">查看 / 编辑本周大纲</button>
+
+            <div class="fold-area hidden" id="weeklyOutlineArea">
+              <textarea
+                id="weeklyOutlineInput"
+                placeholder="把这一周的计划大纲粘贴到这里……"
+              ></textarea>
+              <div class="button-row">
+                <button class="flat-button primary" id="saveWeeklyOutlineBtn">保存下来</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-title">本周作战图</div>
+          <div class="panel-body" id="weeklyDayList">
+            <!-- JS 渲染按日期分组的任务 -->
+          </div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-title">本周补充任务</div>
+          <div class="panel-body">
+            <div id="weeklyExtraTaskList">
+              <!-- JS 渲染本周补充任务 -->
+            </div>
+            <div class="button-row">
+              <button class="flat-button primary" id="addWeeklyTaskBtn">+ 加一个本周任务</button>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-title">周复盘</div>
+          <div class="panel-body" id="weeklyReviewBox">
+            <p>完成任务：<span class="num" id="reviewDoneCount">0</span> / <span class="num" id="reviewTotalCount">0</span></p>
+            <p>延期任务：<span class="num" id="reviewPostponedCount">0</span></p>
+            <p>最长连击：<span id="reviewBestRoutine">暂无</span></p>
+
+            <textarea
+              id="weeklyReviewInput"
+              class="short-textarea"
+              placeholder="这一周不需要被审判，只需要被整理。"
+            ></textarea>
+
+            <div class="button-row">
+              <button class="flat-button primary" id="saveWeeklyReviewBtn">保存复盘</button>
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <!-- 四象限页 -->
+      <section class="page" id="page-matrix" data-page="matrix">
+        <section class="notice-box">
+          <p>不是所有事情都值得同等紧张。</p>
+        </section>
+
+        <section class="quadrant-list">
+          <section class="panel quadrant-section" data-quadrant="1">
+            <div class="panel-title">Ⅰ 重要且紧急</div>
+            <div class="panel-body" id="quadrant1List">
+              <!-- JS 渲染象限 1 -->
+            </div>
+          </section>
+
+          <section class="panel quadrant-section" data-quadrant="2">
+            <div class="panel-title">Ⅱ 重要不紧急</div>
+            <div class="panel-body" id="quadrant2List">
+              <!-- JS 渲染象限 2 -->
+            </div>
+          </section>
+
+          <section class="panel quadrant-section" data-quadrant="3">
+            <div class="panel-title">Ⅲ 不重要但紧急</div>
+            <div class="panel-body" id="quadrant3List">
+              <!-- JS 渲染象限 3 -->
+            </div>
+          </section>
+
+          <section class="panel quadrant-section" data-quadrant="4">
+            <div class="panel-title">Ⅳ 不重要不紧急</div>
+            <div class="panel-body" id="quadrant4List">
+              <!-- JS 渲染象限 4 -->
+            </div>
+          </section>
+        </section>
+      </section>
+
+      <!-- 连击页 -->
+      <section class="page" id="page-routines" data-page="routines">
+        <section class="notice-box">
+          <p>稳定不是一次做到完美，而是一次次回来。</p>
+        </section>
+
+        <section class="panel">
+          <div class="panel-title">今日连击</div>
+          <div class="panel-body">
+            <p>
+              已完成：
+              <span class="num" id="routineDoneCount">0</span>
+              /
+              <span class="num" id="routineTotalCount">0</span>
+            </p>
+            <p>
+              本周豁免：
+              <span class="num" id="routineFreezeUsed">0</span>
+              /
+              <span class="num" id="routineFreezeLimit">1</span>
+            </p>
+          </div>
+        </section>
+
+        <section id="routineCardList">
+          <!-- JS 渲染连击卡片 -->
+        </section>
+      </section>
+
+      <!-- 随记页 -->
+      <section class="page" id="page-notes" data-page="notes">
+        <section class="notice-box">
+          <p>这里不要求清楚，也不要求立刻变成任务。</p>
+        </section>
+
+        <section class="panel">
+          <div class="panel-title">写一点</div>
+          <div class="panel-body">
+            <p class="input-label">今天先放在这里：</p>
+
+            <textarea
+              id="quickNoteInput"
+              placeholder="这里可以写情绪、灵感、想法或暂时说不清的事。"
+            ></textarea>
+
+            <div class="choice-grid note-tag-grid" id="noteTagGrid">
+              <button class="choice active" data-note-tag="emotion">情绪</button>
+              <button class="choice" data-note-tag="idea">灵感</button>
+              <button class="choice" data-note-tag="life">生活</button>
+              <button class="choice" data-note-tag="study">学习</button>
+              <button class="choice" data-note-tag="creation">创作</button>
+              <button class="choice" data-note-tag="body">身体</button>
+              <button class="choice" data-note-tag="later">待整理</button>
+            </div>
+
+            <div class="button-row">
+              <button class="flat-button primary" id="saveQuickNoteBtn">保存下来</button>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-title">旧记录</div>
+          <div class="panel-body" id="quickNoteList">
+            <!-- JS 渲染随记卡片 -->
+          </div>
+        </section>
+      </section>
+
+      <!-- 新增任务页 / 面板 -->
+      <section class="page" id="page-new-task" data-page="new-task">
+        <section class="panel">
+          <div class="panel-title">新增任务 <span class="en">/ NEW TASK</span></div>
+          <div class="panel-body">
+            <form id="newTaskForm">
+
+              <div class="form-group">
+                <label for="taskTitle">任务名称</label>
+                <input
+                  type="text"
+                  id="taskTitle"
+                  placeholder="例如：完成项目文档第一版"
+                  autocomplete="off"
+                />
+              </div>
+
+              <div class="form-group">
+                <p class="input-label">所属领域</p>
+                <div class="choice-grid" id="taskCategoryGrid">
+                  <button type="button" class="choice active" data-value="study">学习</button>
+                  <button type="button" class="choice" data-value="project">项目</button>
+                  <button type="button" class="choice" data-value="reading">阅读</button>
+                  <button type="button" class="choice" data-value="health">健康</button>
+                  <button type="button" class="choice" data-value="creation">创作</button>
+                  <button type="button" class="choice" data-value="life">生活</button>
+                  <button type="button" class="choice" data-value="recovery">恢复</button>
+                  <button type="button" class="choice" data-value="admin">事务</button>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <p class="input-label">重要程度</p>
+                <div class="choice-grid" id="importanceGrid">
+                  <button type="button" class="choice" data-value="1">1</button>
+                  <button type="button" class="choice" data-value="2">2</button>
+                  <button type="button" class="choice active" data-value="3">3</button>
+                  <button type="button" class="choice" data-value="4">4</button>
+                  <button type="button" class="choice" data-value="5">5</button>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <p class="input-label">紧急程度</p>
+                <div class="choice-grid" id="urgencyGrid">
+                  <button type="button" class="choice" data-value="1">1</button>
+                  <button type="button" class="choice" data-value="2">2</button>
+                  <button type="button" class="choice active" data-value="3">3</button>
+                  <button type="button" class="choice" data-value="4">4</button>
+                  <button type="button" class="choice" data-value="5">5</button>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <p class="input-label">预计时长</p>
+                <div class="choice-grid" id="estimatedMinutesGrid">
+                  <button type="button" class="choice" data-value="15">15</button>
+                  <button type="button" class="choice active" data-value="30">30</button>
+                  <button type="button" class="choice" data-value="60">60</button>
+                  <button type="button" class="choice" data-value="90">90</button>
+                  <button type="button" class="choice" data-value="120">120</button>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <p class="input-label">能量需求</p>
+                <div class="choice-grid" id="energyGrid">
+                  <button type="button" class="choice" data-value="low">LOW</button>
+                  <button type="button" class="choice active" data-value="medium">MID</button>
+                  <button type="button" class="choice" data-value="high">HIGH</button>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="taskDeadline">截止日期</label>
+                <input type="date" id="taskDeadline" />
+              </div>
+
+              <div class="form-group">
+                <p class="input-label">加入位置</p>
+                <label class="check-line">
+                  <input type="checkbox" id="taskShowToday" />
+                  <span>加入今日</span>
+                </label>
+
+                <label class="check-line">
+                  <input type="checkbox" id="taskShowWeekly" />
+                  <span>加入本周</span>
+                </label>
+
+                <label class="check-line">
+                  <input type="checkbox" id="taskIsTodayMust" />
+                  <span>作为今日必做</span>
+                </label>
+              </div>
+
+              <div class="form-group">
+                <label for="taskDescription">备注</label>
+                <textarea
+                  id="taskDescription"
+                  class="short-textarea"
+                  placeholder="可以写任务说明、第一步、注意事项……"
+                ></textarea>
+              </div>
+
+              <p class="form-message" id="taskFormMessage"></p>
+
+              <div class="button-row form-actions">
+                <button type="submit" class="flat-button primary">保存任务</button>
+                <button type="button" class="flat-button" id="cancelNewTaskBtn">先取消</button>
+              </div>
+
+            </form>
+          </div>
+        </section>
+      </section>
+
+
+      <!-- 数据页 -->
+      <section class="page" id="page-data" data-page="data">
+        <section class="notice-box">
+          <p>所有数据默认只保存在当前浏览器的 localStorage 中。换设备、清缓存或换浏览器前，请先导出备份。</p>
+        </section>
+
+        <section class="panel">
+          <div class="panel-title">数据备份 <span class="en">/ BACKUP</span></div>
+          <div class="panel-body">
+            <p>导出会生成一个 JSON 文件，包含任务、连击、随记、本周计划和周复盘。</p>
+            <div class="button-row">
+              <button class="flat-button primary" id="exportDataBtn" type="button">导出 JSON 备份</button>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-title">导入数据 <span class="en">/ IMPORT</span></div>
+          <div class="panel-body">
+            <p>导入会覆盖当前浏览器里的系统数据。建议先导出现有数据，再导入新备份。</p>
+            <input id="importDataInput" type="file" accept="application/json,.json" />
+          </div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-title">恢复示例数据</div>
+          <div class="panel-body">
+            <p>这会清空当前浏览器里的数据，并恢复公开仓库自带的示例数据。</p>
+            <div class="button-row">
+              <button class="flat-button danger" id="resetDemoDataBtn" type="button">恢复示例数据</button>
+            </div>
+          </div>
+        </section>
+      </section>
+
+    </main>
+
+    <!-- 右下角新增任务按钮 -->
+    <button class="floating-add-button" id="floatingAddBtn" aria-label="新增任务">
+      +
+    </button>
+
+    <!-- 底部导航 -->
+    <nav class="bottom-nav" aria-label="主导航">
+      <button class="nav-button active" data-target="today">今日</button>
+      <button class="nav-button" data-target="weekly">本周</button>
+      <button class="nav-button" data-target="matrix">四象限</button>
+      <button class="nav-button" data-target="routines">连击</button>
+      <button class="nav-button" data-target="notes">随记</button>
+      <button class="nav-button" data-target="data">数据</button>
+    </nav>
+
+  </div>
+
+  <script src="./js/data.js"></script>
+  <script src="./js/main.js"></script>
+</body>
+</html>

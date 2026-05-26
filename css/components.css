@@ -1,0 +1,660 @@
+/* =========================================================
+   Self Recovery System
+   File: css/components.css
+   Purpose: 组件样式
+   ========================================================= */
+
+
+/* =========================
+   1. Panel 旧网页盒子
+   ========================= */
+
+.panel {
+  margin: 10px 8px;
+  border: 1px solid var(--line);
+  background: var(--paper-bg);
+}
+
+.panel-title {
+  padding: 6px 8px;
+  border-bottom: 1px solid var(--line);
+  background: var(--blue-light);
+  color: var(--ink);
+  font-size: var(--text-base);
+  font-weight: 700;
+  line-height: var(--line-height-tight);
+  letter-spacing: 0.04em;
+}
+
+.panel-body {
+  padding: 8px;
+}
+
+.panel-body > *:last-child {
+  margin-bottom: 0;
+}
+
+
+/* =========================
+   2. 状态盒 / 提示盒
+   ========================= */
+
+.status-box {
+  margin: 10px 8px;
+  padding: 8px;
+  border: 1px solid var(--line);
+  background: #F5F1E8;
+}
+
+.notice-box {
+  margin: 10px 8px;
+  padding: 8px;
+  border: 1px solid var(--line-soft);
+  background: var(--blue-pale);
+  color: var(--ink);
+}
+
+.notice-box p,
+.status-box p {
+  margin: 0;
+}
+
+.notice-box p + p,
+.status-box p + p {
+  margin-top: var(--space-1);
+}
+
+
+/* =========================
+   3. 平面按钮
+   ========================= */
+
+.flat-button {
+  border: 1px solid var(--line);
+  background: var(--button-bg);
+  color: var(--ink);
+  padding: 7px 10px;
+  border-radius: var(--radius-none);
+  box-shadow: none;
+}
+
+.flat-button.primary {
+  border-color: var(--blue-dark);
+  background: var(--blue-light);
+}
+
+.flat-button.danger {
+  border-color: var(--danger);
+  background: var(--danger-light);
+  color: var(--danger);
+}
+
+.flat-button.small {
+  padding: 4px 7px;
+  font-size: var(--text-meta);
+}
+
+.flat-button:active,
+.flat-button.primary:active {
+  background: var(--blue-mid);
+  color: #FFFFFF;
+}
+
+
+/* =========================
+   4. 选择按钮组
+   ========================= */
+
+.choice-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.choice {
+  border: 1px solid var(--line);
+  background: #F7F7F0;
+  color: var(--ink);
+  padding: 6px 8px;
+  border-radius: var(--radius-none);
+  font-size: var(--text-meta);
+  line-height: var(--line-height-tight);
+}
+
+.choice.active {
+  border-color: var(--blue-dark);
+  background: var(--blue-light);
+  color: var(--blue-dark);
+  font-weight: 700;
+}
+
+.choice[data-value="low"],
+.choice[data-value="medium"],
+.choice[data-value="high"],
+.choice[data-note-tag] {
+  font-family: var(--font-cn);
+}
+
+.choice[data-value="15"],
+.choice[data-value="30"],
+.choice[data-value="60"],
+.choice[data-value="90"],
+.choice[data-value="120"],
+.choice[data-value="1"],
+.choice[data-value="2"],
+.choice[data-value="3"],
+.choice[data-value="4"],
+.choice[data-value="5"] {
+  font-family: var(--font-en);
+}
+
+
+/* =========================
+   5. 任务条 TaskItem
+   ========================= */
+
+.task-item {
+  padding: 8px 0;
+  border-bottom: 1px dotted var(--line-dotted);
+}
+
+.task-item:last-child {
+  border-bottom: none;
+}
+
+.task-main {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: var(--text-base);
+  line-height: var(--line-height-base);
+}
+
+.task-check {
+  flex: 0 0 auto;
+  width: 17px;
+  height: 17px;
+  margin-top: 3px;
+  border: 1px solid var(--line);
+  background: var(--input-bg);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-en);
+  font-size: 13px;
+  line-height: 1;
+  color: var(--blue-dark);
+}
+
+.task-title {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.task-item.task-done .task-title {
+  color: var(--muted-light);
+  text-decoration: line-through;
+}
+
+.task-item.task-done .task-check::after {
+  content: "×";
+}
+
+.task-meta {
+  margin-left: 25px;
+  margin-top: 3px;
+  color: var(--muted);
+  font-family: var(--font-en);
+  font-size: var(--text-xs);
+  line-height: var(--line-height-tight);
+  letter-spacing: 0.04em;
+}
+
+.task-detail {
+  margin: 8px 0 0 25px;
+  padding: 7px 8px;
+  border-left: 2px solid var(--line-soft);
+  background: #FFFFFB;
+  font-size: var(--text-meta);
+  line-height: var(--line-height-base);
+}
+
+.task-detail p {
+  margin-bottom: var(--space-1);
+}
+
+.task-detail-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: var(--space-2);
+}
+
+
+/* =========================
+   6. 小标签 Tag
+   ========================= */
+
+.tag {
+  display: inline-block;
+  margin: 0 4px 3px 0;
+  padding: 1px 4px;
+  border: 1px solid var(--line-soft);
+  background: #F7F7F0;
+  color: var(--muted);
+  font-family: var(--font-en);
+  font-size: var(--text-xs);
+  line-height: 1.35;
+  letter-spacing: 0.03em;
+}
+
+.tag-cn {
+  font-family: var(--font-cn);
+  letter-spacing: 0;
+}
+
+.tag-study {
+  background: var(--cat-study-bg);
+}
+
+.tag-project {
+  background: var(--cat-project-bg);
+}
+
+.tag-reading {
+  background: var(--cat-reading-bg);
+}
+
+.tag-admin {
+  background: var(--cat-admin-bg);
+}
+
+.tag-health {
+  background: var(--cat-health-bg);
+}
+
+.tag-creation {
+  background: var(--cat-creation-bg);
+}
+
+.tag-life {
+  background: var(--cat-life-bg);
+}
+
+.tag-recovery {
+  background: var(--cat-recovery-bg);
+}
+
+
+/* =========================
+   7. 空状态
+   ========================= */
+
+.empty-state {
+  padding: 8px 0;
+  color: var(--muted);
+  font-size: var(--text-meta);
+  line-height: var(--line-height-base);
+}
+
+.empty-state p {
+  margin: 0;
+}
+
+
+/* =========================
+   8. 本周 DayBlock
+   ========================= */
+
+.day-block {
+  margin-bottom: 10px;
+  border: 1px solid var(--line-soft);
+  background: #FFFFFB;
+}
+
+.day-block:last-child {
+  margin-bottom: 0;
+}
+
+.day-title {
+  padding: 5px 7px;
+  border-bottom: 1px solid var(--line-soft);
+  background: #E8EDF5;
+  font-family: var(--font-en);
+  font-size: var(--text-meta);
+  line-height: var(--line-height-tight);
+  letter-spacing: 0.04em;
+}
+
+.day-content {
+  padding: 7px 8px;
+  font-size: var(--text-meta);
+  line-height: var(--line-height-loose);
+}
+
+.day-content p {
+  margin: 0;
+}
+
+.day-content p + p {
+  border-top: 1px dotted var(--line-pale);
+  margin-top: 4px;
+  padding-top: 4px;
+}
+
+.time-block-label {
+  display: inline-block;
+  min-width: 42px;
+  color: var(--blue-dark);
+  font-weight: 700;
+}
+
+
+/* =========================
+   9. 四象限
+   ========================= */
+
+.quadrant-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.quadrant-section .panel-title {
+  background: var(--blue-light);
+}
+
+.quadrant-section[data-quadrant="1"] .panel-title {
+  background: var(--pink-light);
+}
+
+.quadrant-section[data-quadrant="2"] .panel-title {
+  background: var(--blue-light);
+}
+
+.quadrant-section[data-quadrant="3"] .panel-title {
+  background: var(--yellow-light);
+}
+
+.quadrant-section[data-quadrant="4"] .panel-title {
+  background: var(--gray-light);
+}
+
+
+/* =========================
+   10. 连击 StreakCard
+   ========================= */
+
+.streak-card {
+  margin: 10px 8px;
+  border: 1px solid var(--line);
+  background: var(--paper-bg);
+}
+
+.streak-name {
+  padding: 6px 8px;
+  border-bottom: 1px solid var(--line);
+  background: #EEF1F6;
+  font-size: var(--text-base);
+  font-weight: 700;
+}
+
+.streak-data {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-bottom: 1px dotted var(--line-soft);
+  padding: 8px;
+  font-family: var(--font-en);
+  font-size: var(--text-meta);
+  line-height: var(--line-height-base);
+}
+
+.streak-data-item {
+  min-width: 0;
+}
+
+.streak-label {
+  display: block;
+  color: var(--muted);
+  font-size: var(--text-xs);
+  letter-spacing: 0.08em;
+}
+
+.streak-value {
+  display: block;
+  color: var(--ink);
+  font-size: var(--text-md);
+}
+
+.streak-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 8px;
+}
+
+.streak-card.routine-done .streak-name {
+  background: var(--green-light);
+}
+
+
+/* =========================
+   11. 随记 NoteCard
+   ========================= */
+
+.note-card {
+  padding: 8px 0;
+  border-bottom: 1px dotted var(--line-dotted);
+}
+
+.note-card:last-child {
+  border-bottom: none;
+}
+
+.note-head {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.note-date {
+  color: var(--muted);
+  font-family: var(--font-en);
+  font-size: var(--text-xs);
+}
+
+.note-content {
+  margin: 0 0 6px;
+  white-space: pre-wrap;
+  line-height: var(--line-height-base);
+}
+
+.note-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+
+/* =========================
+   12. 随记标签
+   ========================= */
+
+.note-tag {
+  display: inline-block;
+  padding: 1px 5px;
+  border: 1px solid var(--line-soft);
+  background: var(--pink-light);
+  font-size: var(--text-xs);
+  line-height: 1.35;
+}
+
+.note-tag.idea {
+  background: var(--yellow-light);
+}
+
+.note-tag.life {
+  background: var(--gray-light);
+}
+
+.note-tag.study {
+  background: var(--blue-light);
+}
+
+.note-tag.creation {
+  background: var(--pink-light);
+}
+
+.note-tag.body {
+  background: var(--green-light);
+}
+
+.note-tag.later {
+  background: #F7F7F0;
+}
+
+
+/* =========================
+   13. 底部导航
+   ========================= */
+
+.bottom-nav {
+  position: fixed;
+  left: 50%;
+  bottom: 0;
+  width: 100%;
+  max-width: var(--app-max-width);
+  height: var(--bottom-nav-height);
+  transform: translateX(-50%);
+  background: var(--paper-bg);
+  border-top: 1px solid var(--line);
+  border-left: 1px solid var(--line);
+  border-right: 1px solid var(--line);
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  z-index: var(--z-bottom-nav);
+}
+
+.nav-button {
+  border: none;
+  border-right: 1px solid var(--line-soft);
+  background: transparent;
+  color: var(--ink);
+  font-family: var(--font-cn);
+  font-size: var(--text-meta);
+  padding: 0;
+}
+
+.nav-button:last-child {
+  border-right: none;
+}
+
+.nav-button.active {
+  background: var(--blue-light);
+  color: var(--blue-dark);
+  font-weight: 700;
+}
+
+.nav-button:active {
+  background: var(--blue-mid);
+  color: #FFFFFF;
+}
+
+
+/* =========================
+   14. 右下角新增按钮
+   ========================= */
+
+.floating-add-button {
+  position: fixed;
+  right: max(12px, calc((100vw - var(--app-max-width)) / 2 + 12px));
+  bottom: calc(var(--bottom-nav-height) + 12px);
+  width: var(--float-button-size);
+  height: var(--float-button-size);
+  border: 1px solid var(--blue-dark);
+  background: var(--blue-light);
+  color: var(--blue-dark);
+  font-family: var(--font-en);
+  font-size: 26px;
+  line-height: 1;
+  padding: 0;
+  z-index: var(--z-floating-button);
+}
+
+.floating-add-button:active {
+  background: var(--blue-mid);
+  color: #FFFFFF;
+}
+
+
+/* =========================
+   15. 消息提示
+   ========================= */
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: calc(var(--bottom-nav-height) + 66px);
+  transform: translateX(-50%);
+  width: calc(100% - 32px);
+  max-width: 398px;
+  border: 1px solid var(--line);
+  background: var(--paper-bg);
+  color: var(--ink);
+  padding: 8px 10px;
+  font-size: var(--text-meta);
+  z-index: var(--z-toast);
+}
+
+.toast.success {
+  background: var(--green-light);
+}
+
+.toast.warning {
+  background: var(--yellow-light);
+}
+
+.toast.error {
+  background: var(--danger-light);
+  color: var(--danger);
+}
+
+
+/* =========================
+   16. 本周补充任务小列表
+   ========================= */
+
+.compact-task-list .task-item {
+  padding: 6px 0;
+}
+
+.compact-task-list .task-meta {
+  display: none;
+}
+
+
+/* =========================
+   17. 计数文本
+   ========================= */
+
+.count-text {
+  font-family: var(--font-en);
+  color: var(--blue-dark);
+}
+
+.review-line {
+  margin-bottom: var(--space-1);
+}
+
+
+/* =========================
+   18. 轻量分隔
+   ========================= */
+
+.thin-divider {
+  height: 1px;
+  border: none;
+  border-top: 1px dotted var(--line-soft);
+  margin: 8px 0;
+}
