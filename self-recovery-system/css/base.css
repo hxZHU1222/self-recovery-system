@@ -1,0 +1,349 @@
+/* =========================================================
+   Self Recovery System
+   File: css/base.css
+   Purpose: 基础页面样式
+   ========================================================= */
+
+
+/* =========================
+   1. Reset / Base
+   ========================= */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--page-bg);
+  color: var(--ink);
+  font-family: var(--font-cn);
+  font-size: var(--text-base);
+  line-height: var(--line-height-base);
+  -webkit-font-smoothing: auto;
+  text-rendering: optimizeLegibility;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-top: 0;
+}
+
+p {
+  margin-bottom: var(--space-2);
+}
+
+a {
+  color: var(--blue-dark);
+  text-decoration: underline;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+
+/* =========================
+   2. 字体辅助类
+   ========================= */
+
+.en,
+.num,
+.date,
+.time,
+.stat-number,
+.task-meta {
+  font-family: var(--font-en);
+}
+
+.code {
+  font-family: var(--font-code);
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.small {
+  font-size: var(--text-sm);
+}
+
+.meta {
+  color: var(--muted);
+  font-size: var(--text-meta);
+}
+
+
+/* =========================
+   3. App 外壳
+   ========================= */
+
+.app {
+  width: 100%;
+  min-width: var(--app-min-width);
+  max-width: var(--app-max-width);
+  min-height: 100vh;
+  margin: 0 auto;
+  background: var(--paper-bg);
+  border-left: 1px solid var(--line);
+  border-right: 1px solid var(--line);
+  position: relative;
+}
+
+.main {
+  padding: var(--space-3) 0 calc(var(--bottom-nav-height) + 22px);
+}
+
+
+/* =========================
+   4. 顶部栏
+   ========================= */
+
+.app-header {
+  background: var(--blue-light);
+  border-bottom: 1px solid var(--line);
+  padding: 10px 12px 8px;
+}
+
+.app-title {
+  margin: 0;
+  color: var(--ink);
+  font-family: var(--font-cn);
+  font-size: var(--text-title);
+  font-weight: 700;
+  line-height: var(--line-height-tight);
+  letter-spacing: 0.02em;
+}
+
+.app-subtitle {
+  margin: 3px 0 0;
+  color: var(--muted);
+  font-family: var(--font-en);
+  font-size: var(--text-sm);
+  line-height: var(--line-height-tight);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+
+/* =========================
+   5. 页面切换
+   ========================= */
+
+.page {
+  display: none;
+}
+
+.page.page-active {
+  display: block;
+}
+
+
+/* =========================
+   6. 基础表单
+   ========================= */
+
+input,
+textarea,
+select {
+  width: 100%;
+  border: 1px solid var(--input-border);
+  border-radius: var(--radius-none);
+  background: var(--input-bg);
+  color: var(--ink);
+  font-family: var(--font-cn);
+  font-size: var(--text-base);
+  line-height: var(--line-height-base);
+  padding: 8px;
+  outline: none;
+  box-shadow: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: var(--input-focus);
+  background: #FFFFFF;
+}
+
+textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.short-textarea {
+  min-height: 72px;
+}
+
+label,
+.input-label {
+  display: block;
+  margin-bottom: var(--space-2);
+  color: var(--ink);
+  font-size: var(--text-base);
+}
+
+.form-group {
+  margin-bottom: var(--space-6);
+}
+
+.form-message {
+  min-height: 1.5em;
+  margin: var(--space-2) 0;
+  color: var(--danger);
+  font-size: var(--text-meta);
+}
+
+
+/* =========================
+   7. Checkbox 行
+   ========================= */
+
+.check-line {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-2);
+  line-height: var(--line-height-base);
+}
+
+.check-line input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  flex: 0 0 auto;
+  padding: 0;
+  border: 1px solid var(--line);
+  background: var(--input-bg);
+  -webkit-appearance: checkbox;
+  appearance: checkbox;
+}
+
+
+/* =========================
+   8. 基础按钮
+   ========================= */
+
+button {
+  border: 1px solid var(--button-border);
+  border-radius: var(--radius-none);
+  background: var(--button-bg);
+  color: var(--ink);
+  font-family: var(--font-cn);
+  font-size: var(--text-base);
+  line-height: var(--line-height-tight);
+  padding: 7px 10px;
+  box-shadow: none;
+  transition:
+    background-color var(--transition-fast),
+    border-color var(--transition-fast),
+    color var(--transition-fast);
+}
+
+button:active {
+  background: var(--button-bg-active);
+}
+
+.button-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: var(--space-3);
+}
+
+.form-actions {
+  margin-top: var(--space-5);
+}
+
+
+/* =========================
+   9. 折叠区域
+   ========================= */
+
+.hidden {
+  display: none !important;
+}
+
+.fold-area {
+  margin-top: var(--space-3);
+}
+
+
+/* =========================
+   10. 状态文字
+   ========================= */
+
+.status-line {
+  margin: 0 0 var(--space-1);
+  line-height: var(--line-height-base);
+}
+
+.weekly-title {
+  font-weight: 700;
+}
+
+
+/* =========================
+   11. 可访问性与触摸
+   ========================= */
+
+.nav-button,
+.choice,
+.flat-button,
+.floating-add-button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 1px dotted var(--blue-dark);
+  outline-offset: 2px;
+}
+
+
+/* =========================
+   12. 桌面端基础兜底
+   ========================= */
+
+@media (min-width: 768px) {
+  body {
+    padding: 0;
+  }
+
+  .app {
+    min-height: 100vh;
+  }
+}
